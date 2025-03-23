@@ -14,7 +14,7 @@ st.write("This analysis compares two different promotion types and their impact 
 # Data loading
 @st.cache_data
 def load_data():
-    df = pd.read_csv('/Users/rohitdesai/Documents/Projects/A:B Testing/Dataset.csv')
+    df = pd.read_csv('Dataset.csv')
     if 'Unnamed: 0' in df.columns:
         df.drop(axis=1, columns='Unnamed: 0', inplace=True)
     return df
