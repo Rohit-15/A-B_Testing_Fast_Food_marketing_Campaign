@@ -246,13 +246,24 @@ elif page == "Conclusion":
     st.write("""
     ### Key Findings:
     
-    - Promotion 1 generates significantly higher sales compared to Promotion 2
-    - The effect is statistically significant (p < 0.001)
-    - Promotion 1 produces sales that are 0.68 standard deviations higher than Promotion 2 (medium to large effect)
+    * Promotion 1 significantly outperforms Promotion 2 with a p-value < 0.005
+    * The average sales for Control group (stores with Promotion 1) were $58.10k versus $47.33k for Treatment group (stores with Promotion 2)
+    * This represents a $10.77k absolute increase or 22.75% improvement with Promotion 1
+    * The effect size (Cohen's d = 0.68) indicates a moderate to large practical significance
+    * Promotion 1 outperformed Promotion 2 across all market sizes, the advantage was largest in Large markets (+$14.91k difference)
+    * Promotion 1 outperformed Promotion 2 in most age groups, the largest advantage was in newer stores (0-5 years) with a $17.11k difference
+    * Interestingly, for stores aged 11-15 years, Promotion 2 performed slightly better (-$1.88k difference)
+    * Promotion 1 consistently outperformed Promotion 2 across all four weeks, the gap between promotions widened over time, with the largest difference in Week 4 ($12.16k)
+    * 
+    
     
     ### Recommendation:
     
-    Based on this analysis, Promotion 1 should be preferred over Promotion 2 to maximize sales.
+    1) Implement Promotion 1 for the new menu item across all locations
+    2) Prioritize Large markets where Promotion 1 showed the strongest advantage (+$14.91k)
+    3) Focus especially on newer stores (0-5 years) where the impact was highest (+$17.11k)
+    4) For stores in the 11-15 year age range, consider Promotion 2 as its performance was slightly better comapred to Promotion 1
+    5) Monitor performance over time to ensure the promotion advantage remains consistent
     """)
     
     # Summary metrics
