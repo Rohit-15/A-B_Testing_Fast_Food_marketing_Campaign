@@ -158,6 +158,52 @@ elif page == "Statistical Testing":
         st.metric("Effect Size (Cohen's d)", f"{effect_size:.2f}", 
                   "Large" if effect_size > 0.8 else "Medium" if effect_size > 0.5 else "Small")
 
+    st.subheader("Analysis by segement")
+        
+    # Aanalysis by Segemnt
+    def analyze_by_segment(df, segment_column):
+    
+        # Group by segment and promotion
+        grouped = df.groupby([segment_column, 'Promotion'])['SalesInThousands'].agg(['count', 'mean', 'std'])
+        grouped = grouped.reset_index()
+        
+        # Reshape to have promotions as columns
+        pivot_table = grouped.pivot_table(
+            index=segment_column, 
+            columns='Promotion', 
+            values=['count', 'mean', 'std']
+        )
+        
+        # Calculate the difference and percentage difference
+        segemnt_results = pd.DataFrame()
+        segemnt_results[segment_column] = pivot_table.index
+        segemnt_results['Control_Group_count'] = pivot_table[('count', 1)].values
+        segemnt_results['Treatment_Group_count'] = pivot_table[('count', 2)].values
+        segemnt_results['Control_Group_mean'] = pivot_table[('mean', 1)].values
+        segemnt_results['Treatment_Group_mean'] = pivot_table[('mean', 2)].values
+        segemnt_results['difference'] = segemnt_results['Control_Group_mean'] - segemnt_results['Treatment_Group_mean']
+        segemnt_results['percent_diff'] = (segemnt_results['difference'] / segemnt_results['Treatment_Group_mean']) * 100
+        
+        # Print segment results summary
+        for _, row in segemnt_results.iterrows():
+            segment = row[segment_column]
+            diff = row['difference']
+            pct = row['percent_diff']
+            p1_mean = row['Control_Group_mean']
+            p2_mean = row['Treatment_Group_mean']
+            
+            print(f"  {segment}: Control Group (${p1_mean:.2f}k) vs Treatment Group (${p2_mean:.2f}k) - Diff: ${diff:.2f}k ({pct:.2f}%)")
+        
+        st.dataframe(segemnt_results)
+    
+    st.markdown(""" * MarketSize Analysis""")
+    analyze_by_segment(df,'MarketSize')
+
+    st.markdown(""" * AgeGroup Analysis""")
+    analyze_by_segment(df,'AgeGroup')
+
+    # Interaction Effects
+    
     st.subheader("Interaction Effects")
     def interaction_effects():
        
