@@ -15,6 +15,9 @@ st.write("This analysis compares two different promotion types and their impact 
 @st.cache_data
 def load_data():
     df = pd.read_csv('Dataset.csv')
+    age_bins = [0, 5, 10, 15, float('inf')]
+    age_labels = ['0-5 years', '6-10 years', '11-15 years', '16+ years']
+    df['AgeGroup'] = pd.cut(df['AgeOfStore'], bins=age_bins, labels=age_labels)
     if 'Unnamed: 0' in df.columns:
         df.drop(axis=1, columns='Unnamed: 0', inplace=True)
     return df
@@ -113,8 +116,8 @@ elif page == "Statistical Testing":
     
     col1, col2 = st.columns(2)
     with col1:
-        st.metric("Promotion 1 Normality (p-value)", f"{s1[1]:.6f}", "Passes Normality Assumption" if s1[1] > 0.05 else "Fails Normality Assumption")
-        st.metric("Promotion 2 Normality (p-value)", f"{s2[1]:.6f}", "Passes Normality Assumption" if s2[1] > 0.05 else "Fails Normality Assumption")
+        st.metric("Control Group Normality (p-value)", f"{s1[1]:.6f}", "Passes Normality Assumption" if s1[1] > 0.05 else "Fails Normality Assumption")
+        st.metric("Treatment Group Normality (p-value)", f"{s2[1]:.6f}", "Passes Normality Assumption" if s2[1] > 0.05 else "Fails Normality Assumption")
     
     with col2:
         st.metric("Equal Variance (p-value)", f"{levene_test[1]:.6f}", "Passes Variance Assumtion" if levene_test[1] > 0.05 else "Fails Variance Assumption")
@@ -144,13 +147,46 @@ elif page == "Statistical Testing":
     st.subheader("Practical Significance")
     col1, col2 = st.columns(2)
     with col1:
-        st.metric("Promotion 1 Mean Sales", f"{mean_1:.2f}")
-        st.metric("Promotion 2 Mean Sales", f"{mean_2:.2f}")
+        st.metric("Control Group Mean Sales", f"{mean_1:.2f}")
+        st.metric("Treatment Group Mean Sales", f"{mean_2:.2f}")
     
     with col2:
         st.metric("Mean Difference", f"{mean_1 - mean_2:.2f}")
         st.metric("Effect Size (Cohen's d)", f"{effect_size:.2f}", 
                   "Large" if effect_size > 0.8 else "Medium" if effect_size > 0.5 else "Small")
+
+    st.subheader("Interaction Effects")
+    def interaction_effects():
+       
+        # Promotion Model
+        model1 = ols('SalesInThousands ~ C(Promotion)', data=df).fit()
+        st.markdown(""" * Sales(in thousands) ~ Promotion""") 
+        st.write(sm.stats.anova_lm(model1,typ=2))
+
+        # 2. Promotion and MarketSize model
+        model2 = ols('SalesInThousands ~ C(Promotion) + C(MarketSize)', data=df).fit()
+        st.markdown(""" * Sales(in thousands) ~ Promotion + MarketSize""")
+        st.write(sm.stats.anova_lm(model2,typ=2)) 
+
+        # 3. Promotion, MarketSize and their interaction
+        model3 = ols('SalesInThousands ~ C(Promotion) * C(MarketSize)', data=df).fit()
+        st.markdown(""" * Sales(in thousands) ~ Promotion * MarketSize""")
+        st.write(sm.stats.anova_lm(model3,typ=2)) 
+
+        # 4. Promotion and AgeGroup model
+        model4 = ols('SalesInThousands ~ C(Promotion) + C(AgeGroup)', data=df).fit()
+        st.markdown(""" * Sales(in thousands) ~ Promotion + AgeGroup""")
+        st.write(sm.stats.anova_lm(model4,typ=2)) 
+
+        # 5. Promotion, AgeGroup and their interaction
+        model5 = ols('SalesInThousands ~ C(Promotion) * C(AgeGroup)', data=df).fit()
+        st.markdown(""" * Sales(in thousands) ~ Promotion * AgeGroup""")
+        st.write(sm.stats.anova_lm(model5,typ=2)) 
+
+    
+    interaction_effects()
+
+
 
 elif page == "Conclusion":
     st.header("Conclusion")
