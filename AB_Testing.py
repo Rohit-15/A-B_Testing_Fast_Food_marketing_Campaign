@@ -260,7 +260,7 @@ elif page == "Conclusion":
     
     ### Recommendation:
     
-    1) Implement Promotion 1 for the new menu item across all locations
+    1) Implement Promotion 1 for the new menu item across most locations
     2) Prioritize Large markets where Promotion 1 showed the strongest advantage (+$14.91k)
     3) Focus especially on newer stores (0-5 years) where the impact was highest (+$17.11k)
     4) For stores in the 11-15 year age range, consider Promotion 2 as its performance was slightly better comapred to Promotion 1
