@@ -137,7 +137,7 @@ elif page == "Statistical Testing":
     st.metric("p-value", f"{p_value:.10f}", "Statistically Significant" if p_value < 0.05 else "Not Significant")
     
     if p_value < 0.05:
-        st.success("The distribution of sales for Control Group and treatment Group are significantly different.")
+        st.success("The distribution of sales for Control Group and Treatment Group are significantly different.")
         
     # Effect size calculation
     n1 = len(promo1_data)
