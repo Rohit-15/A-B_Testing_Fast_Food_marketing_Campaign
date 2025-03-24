@@ -247,7 +247,8 @@ elif page == "Conclusion":
     ### Key Findings:
     
     * Promotion 1 significantly outperforms Promotion 2 with a p-value < 0.005
-    * The average sales for Control group (stores with Promotion 1) were $58.10k versus $47.33k for Treatment group (stores with Promotion 2)
+    * Average sales for Control group (stores with Promotion 1) is $58.10k
+    * Average sales for Treatment group (stores with Promotion 2) is $47.33k 
     * This represents a $10.77k absolute increase or 22.75% improvement with Promotion 1
     * The effect size (Cohen's d = 0.68) indicates a moderate to large practical significance
     * Promotion 1 outperformed Promotion 2 across all market sizes, the advantage was largest in Large markets (+$14.91k difference)
