@@ -37,22 +37,25 @@ if page == "Overview":
     st.subheader("Problem Statement")
     st.markdown(""" Which of the two marketing promotions (Promotion 1 or Promotion 2) generates higher sales for our new menu item, as measured by weekly sales in thousands of dollars, across our store locations over a four-week test period?""")
     st.subheader("Primary Success Metric")
-    st.write(" Weekly sales of new menu item in thousands of dollars")
+    st.write(" Average sales of new menu item in thousands of dollars")
     st.subheader('Experiment Design')
     st.markdown("""
     * Both promotions will be tested simultaneously across multiple store locations
+    * Stores assigned Promotion 1 will be considered as Control Group. Stroes assigned Promotion 2 will be considered Treatment Group
+    * Stores have been randomly assigned to Control group and Treamtment group based on factors such as Market Size and Age of Store 
     * Sales will be tracked over a four-week period
     * Each location will implement only one promotion type throughout the test period            
     """)
     st.subheader("Hypothesis")
     st.markdown("""
-    * Null Hypothesis (H₀): There is no significant difference in weekly sales (SalesInThousands) between stores using Promotion 1 and stores using Promotion 2.
-    * Alternative Hypothesis (H₁): There is a significant difference in weekly sales (SalesInThousands) between stores using Promotion 1 and stores using Promotion 2.
+    * Null Hypothesis (H₀): There is no significant difference in average sales (SalesInThousands) between Control group and Treatment group.
+    * Alternative Hypothesis (H₁): There is a significant difference in average sales (SalesInThousands) between Control group and Treatment group.
     """)
     st.subheader("Decision Criteria")
     st.markdown("""
     1) Statistical significance will be evaluated at the 95% confidence level (α = 0.05)
     2) If a statistically significant difference exists, the promotion with higher mean sales will be selected
+    3) Segmentation analysis will be conducted to determine if the Treatment group's promotion effectiveness varies by market size or store age
     """)
 
     
