@@ -4,6 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import shapiro, levene, mannwhitneyu
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
 # Set page title and configuration
 st.set_page_config(page_title="A/B Testing Analysis: Promotion Effectiveness", layout="wide")
