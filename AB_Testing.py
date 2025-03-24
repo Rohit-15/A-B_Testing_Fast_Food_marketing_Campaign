@@ -254,7 +254,7 @@ elif page == "Conclusion":
     * Promotion 1 outperformed Promotion 2 in most age groups, the largest advantage was in newer stores (0-5 years) with a $17.11k difference
     * Interestingly, for stores aged 11-15 years, Promotion 2 performed slightly better (-$1.88k difference)
     * Promotion 1 consistently outperformed Promotion 2 across all four weeks, the gap between promotions widened over time, with the largest difference in Week 4 ($12.16k)
-    * 
+    
     
     
     ### Recommendation:
